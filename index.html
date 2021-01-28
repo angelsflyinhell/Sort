@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>/Sort</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="sort.js"></script>
+    <script src="Chart.min.js"></script>
+</head>
+
+<body>
+
+    <h1>
+        <center>/Sort</center>
+    </h1>
+    <br>
+
+    <canvas id="chart" width="400" height="300"></canvas>
+
+    <script>
+        var ctx = document.getElementById('chart').getContext('2d');
+        var tChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: array,
+                datasets: [{
+                    data: array,
+                    backgroundColor: "rgba(111, 99, 236, 0.5)",
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+        function sortArray() {
+            tChart.data.datasets[0].data = sortedArray;
+            tChart.update();
+        }
+
+        function resetArray() {
+            min = document.getElementById('min').value;
+            max = document.getElementById('max').value;
+            generateArray();
+            bubbleSort(array);
+            tChart.data.datasets[0].data = array;
+            tChart.update();
+        }
+    </script>
+    <input type="button" value="Sort Array" onclick="sortArray()">
+    <input type="button" value="New Random Array" onclick="resetArray()">
+    <input type="text" placeholder="min" id="min">
+    <input type="text" placeholder="max" id="max">
+</body>
+
+</html>
